@@ -1,0 +1,15 @@
+name: sportsbook
+version: "1.0"
+profile: sportsbook
+
+models:
+  sportsbook:
+    staging:
+      schema: staging
+      materialized: view
+    dimensions:
+      schema: mart
+      materialized: table
+    facts:
+      schema: mart
+      materialized: table

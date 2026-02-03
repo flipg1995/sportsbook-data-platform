@@ -1,0 +1,8 @@
+.env
+pgdata/
+__pycache__/
+*.log
+.dbt/target
+.airflow/
+.vscode/
+.idea/
