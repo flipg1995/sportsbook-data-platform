@@ -7,7 +7,7 @@ This repository was built as a **production-oriented case study**, not a tutoria
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 **Flow:**
 
@@ -26,7 +26,7 @@ Raw CSV files
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 - **Python 3.10**
 - **PostgreSQL 15**
@@ -38,7 +38,7 @@ Raw CSV files
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ├── airflow/
 │ ├── dags/
@@ -69,7 +69,7 @@ Raw CSV files
 
 ---
 
-## ⭐ Data Modeling
+## Data Modeling
 
 The data warehouse follows a **Star Schema** design.
 
@@ -92,7 +92,7 @@ This design enables:
 
 ---
 
-## ⏱️ Orchestration (Airflow)
+## Orchestration (Airflow)
 
 The pipeline is orchestrated using **Apache Airflow**.
 
@@ -108,7 +108,7 @@ The DAG is **trigger-based** (no schedule by default).
 
 ---
 
-## 🧪 Data Quality
+## Data Quality
 
 **Great Expectations** is used to validate critical tables.
 
@@ -121,7 +121,7 @@ Quality checks run automatically after dbt transformations.
 
 ---
 
-## 📊 Visualization
+## Visualization
 
 **Metabase** connects directly to PostgreSQL and exposes:
 
@@ -133,7 +133,7 @@ Metabase runs fully containerized.
 
 ---
 
-## 🚀 How to Run Locally (Ubuntu)
+##  How to Run Locally
 
 ### Prerequisites
 - Docker
@@ -153,7 +153,7 @@ Airflow	http://localhost:8080
 Metabase http://localhost:3000
 PostgreSQL http://localhost:5432
 
-### ▶️ Run the Pipeline
+### Run the Pipeline
 
 Open Airflow UI
 
@@ -163,7 +163,7 @@ Trigger the DAG manually
 
 If all tasks succeed, the data warehouse is ready.
 
-### 🔐 Database Connection (Metabase)
+### Database Connection (Metabase)
 
 Host: postgres
 
