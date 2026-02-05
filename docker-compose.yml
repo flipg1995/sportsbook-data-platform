@@ -47,10 +47,9 @@ services:
     entrypoint: ["/bin/bash", "-c"]
     command: ["tail -f /dev/null"]
 
-
-  dbt-docs:
+  dbt-docs-generate:
     image: ghcr.io/dbt-labs/dbt-postgres:1.7.9
-    container_name: dbt_docs
+    container_name: dbt_docs_generate
     depends_on:
       - postgres
     environment:
@@ -59,10 +58,22 @@ services:
       - ./dbt:/dbt
       - ./profiles:/root/.dbt
     working_dir: /dbt
+    entrypoint: ["dbt"]
+    command: ["docs", "generate"]
+
+
+
+  dbt-docs-ui:
+    image: nginx:alpine
+    container_name: dbt_docs_ui
+    depends_on:
+      - dbt-docs-generate
     ports:
-      - "8081:8080"
-    command: docs serve --host 0.0.0.0 --port 8080
-    restart: unless-stopped
+      - "8081:80"
+    volumes:
+      - ./dbt/target:/usr/share/nginx/html:ro
+
+
 
   metabase:
     image: metabase/metabase:latest

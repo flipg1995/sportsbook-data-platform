@@ -3,7 +3,6 @@ import psycopg2
 import os
 from io import StringIO
 
-
 POSTGRES_CONFIG = {
     "host": "postgres",
     "database": "sportsbook_dw",
@@ -22,25 +21,23 @@ files = [
     "Events.csv",
 ]
 
-
 def load_csv_to_postgres(csv_path, table_name, conn):
     df = pd.read_csv(csv_path)
-
     df.columns = [c.lower() for c in df.columns]
 
     cursor = conn.cursor()
 
     cursor.execute("CREATE SCHEMA IF NOT EXISTS raw;")
 
-    cursor.execute(f'DROP TABLE IF EXISTS raw."{table_name}";')
-
     columns = ", ".join([f'"{col}" TEXT' for col in df.columns])
-    create_table_sql = f"""
-        CREATE TABLE raw."{table_name}" (
+    create_table_sql = f'''
+        CREATE TABLE IF NOT EXISTS raw."{table_name}" (
             {columns}
         );
-    """
+    '''
     cursor.execute(create_table_sql)
+
+    cursor.execute(f'DELETE FROM raw."{table_name}";')
 
     buffer = StringIO()
     df.to_csv(buffer, index=False, header=False)
@@ -55,7 +52,6 @@ def load_csv_to_postgres(csv_path, table_name, conn):
 
     conn.commit()
     cursor.close()
-
 
 def main():
     conn = psycopg2.connect(**POSTGRES_CONFIG)
@@ -73,7 +69,6 @@ def main():
 
     conn.close()
     print("Raw layer loaded successfully")
-
 
 if __name__ == "__main__":
     main()
