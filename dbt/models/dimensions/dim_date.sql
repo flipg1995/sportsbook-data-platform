@@ -1,6 +1,6 @@
 with dates as (
     select distinct
-        cast("Placed_At" as date) as date
+        cast("sportbetsettled_placed" as date) as date
     from {{ ref('stg_sportsbook') }}
 )
 select

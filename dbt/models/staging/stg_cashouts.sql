@@ -1,10 +1,7 @@
-{{ config(materialized='view') }}
-
 select
-    cast(cashout_id as bigint)        as cashout_id,
-    cast(bet_id as bigint)            as bet_id,
-    cast(customer_id as bigint)       as customer_id,
-    cast(amount as numeric)           as amount,
-    cast(created_at as timestamp)     as created_at
+    cashoutattempt_bet_cashout_id,
+    cashoutattempt_bet_id,
+    cashoutattempt_bet_cashout_created,
+    cashoutattempt_bet_cashout_status,
+    cashoutattempt_cashout_amount
 from {{ source('raw', 'cashouts') }}
-

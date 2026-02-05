@@ -1,8 +1,9 @@
-{{ config(materialized='view') }}
-
 select
-    cast(event_id as bigint)          as event_id,
-    cast(event_name as text)          as event_name,
-    cast(sport as text)               as sport,
-    cast(event_date as timestamp)     as event_date
+    event_id,
+    event_sport_name,
+    event_class_name,
+    event_type_name,
+    event_name,
+    event_start_time,
+    event_end_time
 from {{ source('raw', 'events') }}

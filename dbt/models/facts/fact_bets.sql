@@ -1,11 +1,14 @@
 {{ config(materialized='table') }}
 
 select
-    b.bet_id,
-    b.customer_id,
-    b.event_id,
-    b.stake,
-    b.payout,
-    b.status,
-    b.created_at as bet_created_at
-from {{ ref('stg_sportsbook') }} b
+    sportbetsettled_bet_id as bet_id,
+    sportbetsettled_customer_id as customer_id,
+    sportbetsettled_event_id as event_id,
+    bettype_name,
+    market_template_name,
+    channel_name,
+    sportbetsettled_placed,
+    sportbetsettled_settled,
+    turnover,
+    winnings
+from {{ ref('stg_sportsbook') }}

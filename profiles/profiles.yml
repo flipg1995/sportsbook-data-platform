@@ -8,3 +8,4 @@ sportsbook:
       password: dw_pass
       port: 5432
       dbname: sportsbook_dw
+      schema: raw
