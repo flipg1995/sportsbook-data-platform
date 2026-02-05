@@ -27,11 +27,9 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./etl:/opt/airflow/etl
-      - ./great_expectations:/opt/airflow/great_expectations
       - ./data:/opt/airflow/data
       - ./dbt:/opt/airflow/dbt
       - ./profiles:/home/airflow/.dbt
-
     ports:
       - "8080:8080"
     command: airflow standalone
@@ -64,8 +62,6 @@ services:
     entrypoint: ["dbt"]
     command: ["docs", "generate"]
 
-
-
   dbt-docs-ui:
     image: nginx:alpine
     container_name: dbt_docs_ui
@@ -76,22 +72,31 @@ services:
     volumes:
       - ./dbt/target:/usr/share/nginx/html:ro
 
-
+  metabase_db:
+    image: postgres:15
+    container_name: metabase_db
+    environment:
+      POSTGRES_DB: metabase
+      POSTGRES_USER: metabase_user
+      POSTGRES_PASSWORD: metabase_pass
+    volumes:
+      - metabase_pgdata:/var/lib/postgresql/data
 
   metabase:
     image: metabase/metabase:latest
     container_name: metabase
     depends_on:
-      - postgres
+      - metabase_db
     ports:
       - "3000:3000"
     environment:
       MB_DB_TYPE: postgres
-      MB_DB_DBNAME: sportsbook_dw
+      MB_DB_DBNAME: metabase
       MB_DB_PORT: 5432
-      MB_DB_USER: dw_user
-      MB_DB_PASS: dw_pass
-      MB_DB_HOST: postgres
+      MB_DB_USER: metabase_user
+      MB_DB_PASS: metabase_pass
+      MB_DB_HOST: metabase_db
 
 volumes:
   pgdata:
+  metabase_pgdata:
