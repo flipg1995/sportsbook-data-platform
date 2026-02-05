@@ -1,3 +1,5 @@
+{{ config(materialized='view') }}
+
 select
     ccl.crm_level,
     sum(fb.turnover::numeric) as total_turnover,

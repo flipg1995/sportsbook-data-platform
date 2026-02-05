@@ -15,3 +15,4 @@ models:
       analytics:
         +schema: report
         +materialized: view
+log-path: null

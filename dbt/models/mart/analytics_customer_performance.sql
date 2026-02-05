@@ -1,4 +1,4 @@
-
+{{ config(materialized='view') }}
 select
     customer_id,
     sum(turnover::numeric) as total_turnover,

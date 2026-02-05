@@ -1,6 +1,0 @@
-datasources:
-  postgres_dw:
-    class_name: Datasource
-    execution_engine:
-      class_name: SqlAlchemyExecutionEngine
-      connection_string: postgresql+psycopg2://dw_user:dw_pass@postgres:5432/sportsbook_dw

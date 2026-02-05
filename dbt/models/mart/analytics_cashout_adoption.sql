@@ -1,3 +1,5 @@
+{{ config(materialized='view') }}
+
 select
     fb.customer_id,
     count(distinct fc.cashout_id) as cashout_attempts,
