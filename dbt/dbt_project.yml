@@ -5,11 +5,12 @@ profile: sportsbook
 models:
   sportsbook:
     staging:
-      schema: staging
-      materialized: view
-    dimensions:
-      schema: mart
-      materialized: table
-    facts:
-      schema: mart
-      materialized: table
+      +schema: staging
+      +materialized: view
+
+    mart:
+      +schema: mart
+      +materialized: table
+
+      analytics:
+        +materialized: view
