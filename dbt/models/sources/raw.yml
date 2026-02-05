@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw
+    database: sportsbook_dw
+    schema: raw
+    tables:
+      - name: sportsbook
+      - name: cashouts
+      - name: customer
+      - name: customer_crm_level
+      - name: events

@@ -1,11 +1,13 @@
 with dates as (
-    select distinct date(placed_at) as date from stg_sportsbook
+    select distinct
+        cast("Placed_At" as date) as date
+    from {{ ref('stg_sportsbook') }}
 )
 select
-    cast(strftime('%Y%m%d', date) as int) as date_key,
+    cast(to_char(date, 'YYYYMMDD') as int) as date_key,
     date,
-    cast(strftime('%Y', date) as int) as year,
-    cast(strftime('%m', date) as int) as month,
-    cast(strftime('%d', date) as int) as day,
-    strftime('%w', date) as weekday
+    extract(year  from date)::int as year,
+    extract(month from date)::int as month,
+    extract(day   from date)::int as day,
+    extract(dow   from date)::int as weekday
 from dates

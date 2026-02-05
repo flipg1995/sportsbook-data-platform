@@ -1,13 +1,11 @@
+{{ config(materialized='view') }}
+
 select
-    SportBetSettled_Bet_ID as bet_id,
-    SportBetSettled_Customer_ID as customer_id,
-    SportBetSettled_Event_ID as event_id,
-    datetime(SportBetSettled_Placed) as placed_at,
-    datetime(SportBetSettled_Settled) as settled_at,
-    Channel_Name as channel,
-    BetType_Name as bet_type,
-    Market_Template_Name as market,
-    Turnover,
-    Winnings,
-    (Turnover - Winnings) as gross_revenue
-from raw_sportsbook
+    cast(bet_id as bigint)            as bet_id,
+    cast(customer_id as bigint)       as customer_id,
+    cast(event_id as bigint)          as event_id,
+    cast(stake as numeric)            as stake,
+    cast(payout as numeric)           as payout,
+    cast(status as text)              as status,
+    cast(created_at as timestamp)     as created_at
+from {{ source('raw', 'sportsbook') }}

@@ -1,7 +1,11 @@
+{{ config(materialized='table') }}
+
 select
-    SportBetSettled_Bet_ID as bet_id,
-    SportBetSettled_Customer_ID as customer_id,
-    Turnover,
-    Winnings,
-    (Turnover - Winnings) as gross_revenue
-from raw.sportsbook
+    b.bet_id,
+    b.customer_id,
+    b.event_id,
+    b.stake,
+    b.payout,
+    b.status,
+    b.created_at as bet_created_at
+from {{ ref('stg_sportsbook') }} b

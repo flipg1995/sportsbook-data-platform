@@ -23,6 +23,13 @@ services:
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://dw_user:dw_pass@postgres:5432/sportsbook_dw
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DEFAULT_TIMEZONE: utc
+      AIRFLOW__WEBSERVER__SESSION_BACKEND: securecookie
+      AIRFLOW__WEBSERVER__SECRET_KEY: this_is_a_dev_secret_key
+      AIRFLOW__LOGGING__LOGGING_LEVEL: INFO
+      AIRFLOW__LOGGING__BASE_LOG_FOLDER: /opt/airflow/logs
+      AIRFLOW__LOGGING__REMOTE_LOGGING: "false"
+      DBT_PROFILES_DIR: /opt/airflow/dbt
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./etl:/opt/airflow/etl
