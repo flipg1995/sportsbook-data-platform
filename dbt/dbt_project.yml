@@ -13,4 +13,5 @@ models:
       +materialized: table
 
       analytics:
+        +schema: report
         +materialized: view

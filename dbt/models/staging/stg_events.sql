@@ -6,4 +6,4 @@ select
     event_name,
     event_start_time,
     event_end_time
-from {{ source('raw', 'events') }}
+from {{ source('bets', 'events') }}

@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: raw
+  - name: bets
     database: sportsbook_dw
-    schema: raw
+    schema: bets
     tables:
       - name: sportsbook
       - name: cashouts

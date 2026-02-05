@@ -3,4 +3,4 @@ select
     customer_datecreation_id,
     customer_gender_name,
     customer_birthday
-from {{ source('raw', 'customer') }}
+from {{ source('bets', 'customer') }}

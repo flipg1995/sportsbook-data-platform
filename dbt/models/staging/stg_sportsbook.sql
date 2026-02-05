@@ -9,4 +9,4 @@ select
     sportbetsettled_settled,
     turnover,
     winnings
-from {{ source('raw', 'sportsbook') }}
+from {{ source('bets', 'sportsbook') }}
