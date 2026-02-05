@@ -29,6 +29,9 @@ services:
       - ./etl:/opt/airflow/etl
       - ./great_expectations:/opt/airflow/great_expectations
       - ./data:/opt/airflow/data
+      - ./dbt:/opt/airflow/dbt
+      - ./profiles:/home/airflow/.dbt
+
     ports:
       - "8080:8080"
     command: airflow standalone

@@ -27,24 +27,24 @@ def load_csv_to_postgres(csv_path, table_name, conn):
 
     cursor = conn.cursor()
 
-    cursor.execute("CREATE SCHEMA IF NOT EXISTS raw;")
+    cursor.execute("CREATE SCHEMA IF NOT EXISTS bets;")
 
     columns = ", ".join([f'"{col}" TEXT' for col in df.columns])
     create_table_sql = f'''
-        CREATE TABLE IF NOT EXISTS raw."{table_name}" (
+        CREATE TABLE IF NOT EXISTS bets."{table_name}" (
             {columns}
         );
     '''
     cursor.execute(create_table_sql)
 
-    cursor.execute(f'DELETE FROM raw."{table_name}";')
+    cursor.execute(f'DELETE FROM bets."{table_name}";')
 
     buffer = StringIO()
     df.to_csv(buffer, index=False, header=False)
     buffer.seek(0)
 
     copy_sql = f'''
-        COPY raw."{table_name}"
+        COPY bets."{table_name}"
         FROM STDIN
         WITH (FORMAT CSV)
     '''
@@ -60,7 +60,7 @@ def main():
         table_name = file.replace(".csv", "").lower()
         file_path = os.path.join(RAW_DATA_PATH, file)
 
-        print(f"Loading {file_path} into table raw.{table_name}")
+        print(f"Loading {file_path} into table bets.{table_name}")
 
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
