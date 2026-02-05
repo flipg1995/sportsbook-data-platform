@@ -1,10 +1,12 @@
+
+{{ config(materialized='table') }}
+
 select
-    c.cashout_id,
-    c.bet_id,
-    b.customer_id,
-    c.created_at,
-    c.status,
-    c.cashout_amount
-from stg_cashouts c
-left join fact_bets b
-    on c.bet_id = b.bet_id
+    cashoutattempt_bet_cashout_id as cashout_id,
+    cashoutattempt_bet_id as bet_id,
+    cashoutattempt_bet_cashout_created,
+    cashoutattempt_bet_cashout_status,
+    cashoutattempt_cashout_amount
+from {{ ref('stg_cashouts') }}
+
+

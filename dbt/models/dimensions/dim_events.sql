@@ -1,9 +1,12 @@
-select distinct
+{{ config(materialized='table') }}
+
+select
     event_id,
-    sport,
-    class,
-    league,
+    event_sport_name,
+    event_class_name,
+    event_type_name,
     event_name,
-    start_time,
-    end_time
-from stg_events
+    event_start_time,
+    event_end_time
+
+from {{ ref('stg_events') }}

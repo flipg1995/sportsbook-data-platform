@@ -6,3 +6,13 @@ __pycache__/
 .airflow/
 .vscode/
 .idea/
+.data/
+data/raw/Cashouts.csv
+data/raw/Customer_crm_level.csv
+data/raw/Customer.csv
+data/raw/Events.csv
+data/raw/Sportsbook.csv
+data/raw/Sportsbook.txt
+logs/
+dbt/target
+dbt/dbt_packages

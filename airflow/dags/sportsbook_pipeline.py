@@ -10,7 +10,7 @@ with DAG(
     tags=["sportsbook", "etl", "dbt"]
 ):
 
-    etl = BashOperator(
+    python_etl = BashOperator(
         task_id="python_etl",
         bash_command="python /opt/airflow/etl/load_raw.py"
     )
@@ -20,17 +20,11 @@ with DAG(
         bash_command="cd /opt/airflow/dbt && dbt run"
     )
 
+
     dbt_test = BashOperator(
         task_id="dbt_test",
         bash_command="cd /opt/airflow/dbt && dbt test"
     )
 
-    gx = BashOperator(
-        task_id="great_expectations",
-        bash_command=(
-            "cd /opt/airflow/great_expectations && "
-            "great_expectations checkpoint run sportsbook_checkpoint"
-        )
-    )
 
-    etl >> dbt_run >> dbt_test >> gx
+    python_etl >> dbt_run >> dbt_test

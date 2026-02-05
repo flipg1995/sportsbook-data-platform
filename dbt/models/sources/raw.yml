@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: bets
+    database: sportsbook_dw
+    schema: bets
+    tables:
+      - name: sportsbook
+      - name: cashouts
+      - name: customer
+      - name: customer_crm_level
+      - name: events
