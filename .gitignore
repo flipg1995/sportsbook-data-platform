@@ -7,3 +7,9 @@ __pycache__/
 .vscode/
 .idea/
 .data/
+data/raw/Cashouts.csv
+data/raw/Customer_crm_level.csv
+data/raw/Customer.csv
+data/raw/Events.csv
+data/raw/Sportsbook.csv
+data/raw/Sportsbook.txt

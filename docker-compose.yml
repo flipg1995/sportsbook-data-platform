@@ -36,6 +36,7 @@ services:
       - ./dbt:/opt/airflow/dbt
       - ./great_expectations:/opt/airflow/great_expectations
       - ./data:/data
+      - ./data:/opt/airflow/data
     ports:
       - "8080:8080"
     command: airflow standalone
